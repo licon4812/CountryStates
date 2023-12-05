@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
-		<PackageVersion>0.0.2</PackageVersion>
+		<PackageVersion>0.0.3</PackageVersion>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 	</PropertyGroup>
@@ -14,7 +14,10 @@
 	<ItemGroup>
 		<None Include="..\..\readme.md" Pack="true" PackagePath="\" />
 		<None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
-		
 	</ItemGroup>
-
+	<ItemGroup>
+		<Content Include="Data\*.*">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 </Project>
