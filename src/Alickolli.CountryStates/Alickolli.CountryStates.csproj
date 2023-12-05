@@ -16,8 +16,6 @@
 		<None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
 	</ItemGroup>
 	<ItemGroup>
-		<Content Include="Data\*.*">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
+		<EmbeddedResource  Include="Data\*.*" />
 	</ItemGroup>
 </Project>

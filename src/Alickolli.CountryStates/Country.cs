@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Alickolli.CountryStates.Models;
 using Newtonsoft.Json;
@@ -23,13 +24,16 @@ namespace Alickolli.CountryStates
         {
             var region = new RegionInfo(countryCode);
             var fileName = region.EnglishName.Replace(" ", "_").ToLower();
-            var file = new FileInfo($"./Data/{fileName}.json");
-            var stream = file.OpenRead();
-            var reader = new StreamReader(stream, Encoding.UTF8);
-            var json = reader.ReadToEnd();
-            var country = JsonConvert.DeserializeObject<Models.Country>(json);
-            var state = country.States.Find(s => s.Abbreviation == stateCode);
-            return state.Name;
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = $"Alickolli.CountryStates.Data.{fileName}.json";
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            using (var reader = new StreamReader(stream))
+            {
+                var json = reader.ReadToEnd();
+                var country = JsonConvert.DeserializeObject<Models.Country>(json);
+                var state = country.States.Find(s => s.Abbreviation == stateCode);
+                return state.Name;
+            }
         }
 
         /// <summary> Returns a collection of States by countryCode. Accepts ISO2 and ISO3 codes </summary>
@@ -37,12 +41,15 @@ namespace Alickolli.CountryStates
         {
             var region = new RegionInfo(countryCode);
             var fileName = region.EnglishName.Replace(" ", "_").ToLower();
-            var file = new FileInfo($"./Data/{fileName}.json");
-            var stream = file.OpenRead();
-            var reader = new StreamReader(stream, Encoding.UTF8);
-            var json = reader.ReadToEnd();
-            var country = JsonConvert.DeserializeObject<Models.Country>(json);
-            return country.States;
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = $"Alickolli.CountryStates.Data.{fileName}.json";
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            using (var reader = new StreamReader(stream))
+            {
+                var json = reader.ReadToEnd();
+                var country = JsonConvert.DeserializeObject<Models.Country>(json);
+                return country.States;
+            }
         }
 
         /// <summary> Returns a state by countryCode and stateCode. Accepts ISO2 and ISO3 codes </summary>
@@ -50,36 +57,45 @@ namespace Alickolli.CountryStates
         {
             var region = new RegionInfo(countryCode);
             var fileName = region.EnglishName.Replace(" ", "_").ToLower();
-            var file = new FileInfo($"./Data/{fileName}.json");
-            var stream = file.OpenRead();
-            var reader = new StreamReader(stream, Encoding.UTF8);
-            var json = reader.ReadToEnd();
-            var country = JsonConvert.DeserializeObject<Models.Country>(json);
-            return country?.States.FirstOrDefault(s => s.Abbreviation == stateCode);
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = $"Alickolli.CountryStates.Data.{fileName}.json";
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            using (var reader = new StreamReader(stream))
+            {
+                var json = reader.ReadToEnd();
+                var country = JsonConvert.DeserializeObject<Models.Country>(json);
+                return country?.States.FirstOrDefault(s => s.Abbreviation == stateCode);
+            }
         }
 
         public static ICollection<State> Provinces(string countryCode, string stateCode)
         {
             var region = new RegionInfo(countryCode);
             var fileName = region.EnglishName.Replace(" ", "_").ToLower();
-            var file = new FileInfo($"./Data/{fileName}.json");
-            var stream = file.OpenRead();
-            var reader = new StreamReader(stream, Encoding.UTF8);
-            var json = reader.ReadToEnd();
-            var country = JsonConvert.DeserializeObject<Models.Country>(json);
-            return country.States;
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = $"Alickolli.CountryStates.Data.{fileName}.json";
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            using (var reader = new StreamReader(stream))
+            {
+                var json = reader.ReadToEnd();
+                var country = JsonConvert.DeserializeObject<Models.Country>(json);
+                return country.States;
+            }
         }
 
         public static State Province(string countryCode, string stateCode)
         {
             var region = new RegionInfo(countryCode);
             var fileName = region.EnglishName.Replace(" ", "_").ToLower();
-            var file = new FileInfo($"./Data/{fileName}.json");
-            var stream = file.OpenRead();
-            var reader = new StreamReader(stream, Encoding.UTF8);
-            var json = reader.ReadToEnd();
-            var country = JsonConvert.DeserializeObject<Models.Country>(json);
-            return country?.States.FirstOrDefault(s => s.Abbreviation == stateCode);
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = $"Alickolli.CountryStates.Data.{fileName}.json";
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            using (var reader = new StreamReader(stream))
+            {
+                var json = reader.ReadToEnd();
+                var country = JsonConvert.DeserializeObject<Models.Country>(json);
+                return country?.States.FirstOrDefault(s => s.Abbreviation == stateCode);
+            }
         }
 
     }
