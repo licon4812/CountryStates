@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Alickolli.CountryStates.Models;
 using Newtonsoft.Json;
@@ -44,7 +45,7 @@ namespace Alickolli.CountryStates
         }
 
         /// <summary> Returns a state by countryCode and stateCode. Accepts ISO2 and ISO3 codes </summary>
-        public static ICollection<State> State(string countryCode, string stateCode)
+        public static State State(string countryCode, string stateCode)
         {
             var country = new RegionInfo(countryCode);
             var fileName = country.EnglishName.Replace(" ", "_").ToLower();
@@ -52,10 +53,10 @@ namespace Alickolli.CountryStates
             var stream = file.OpenRead();
             var reader = new StreamReader(stream, Encoding.UTF8);
             var json = reader.ReadToEnd();
-            return JsonConvert.DeserializeObject<List<State>>(json).FindAll(s=> s.Abbreviation == stateCode);
+            return JsonConvert.DeserializeObject<List<State>>(json).FirstOrDefault(s=> s.Abbreviation == stateCode);
         }
 
-        public static ICollection<State> Province(string countryCode, string stateCode)
+        public static ICollection<State> Provinces(string countryCode, string stateCode)
         {
             var country = new RegionInfo(countryCode);
             var fileName = country.EnglishName.Replace(" ", "_").ToLower();
@@ -65,5 +66,17 @@ namespace Alickolli.CountryStates
             var json = reader.ReadToEnd();
             return JsonConvert.DeserializeObject<List<State>>(json).FindAll(s => s.Abbreviation == stateCode);
         }
+
+        public static State Province(string countryCode, string stateCode)
+        {
+            var country = new RegionInfo(countryCode);
+            var fileName = country.EnglishName.Replace(" ", "_").ToLower();
+            var file = new FileInfo($"./Data/{fileName}.json");
+            var stream = file.OpenRead();
+            var reader = new StreamReader(stream, Encoding.UTF8);
+            var json = reader.ReadToEnd();
+            return JsonConvert.DeserializeObject<List<State>>(json).FirstOrDefault(s => s.Abbreviation == stateCode);
+        }
+
     }
 }
