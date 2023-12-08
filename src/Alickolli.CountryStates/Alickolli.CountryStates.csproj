@@ -2,9 +2,10 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
-		<PackageVersion>0.0.3</PackageVersion>
+		<PackageVersion>0.0.4</PackageVersion>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<RepositoryUrl>https://github.com/licon4812/CountryStatesDotnet</RepositoryUrl>
 	</PropertyGroup>
 
 	<ItemGroup>

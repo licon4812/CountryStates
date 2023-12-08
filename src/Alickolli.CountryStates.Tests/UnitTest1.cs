@@ -39,7 +39,7 @@ namespace Alickolli.CountryStates.Tests
         [Test]
         public void Provinces()
         {
-            var provinces = Country.Provinces("AU", "NSW");
+            var provinces = Country.Provinces("AU");
             provinces.Should().NotBeEmpty();
         }
 
