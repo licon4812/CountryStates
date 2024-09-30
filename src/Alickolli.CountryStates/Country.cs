@@ -12,7 +12,7 @@ namespace Alickolli.CountryStates
 {
     public class Country
     {
-        public static ICollection<Models.Country> Countries { get; set; } = LoadData();
+        internal static ICollection<Models.Country> Countries { get; set; } = LoadData();
         private static ICollection<Models.Country> LoadData()
         {
             var countries = new List<Models.Country>();
@@ -30,6 +30,12 @@ namespace Alickolli.CountryStates
                 }
             }
             return countries;
+        }
+
+        // summary Returns all Countries
+        public static ICollection<Models.Country> AllCountries()
+        {
+            return Countries;
         }
 
         /// <summary> Returns Country Name from countryCode, Accepts ISO2, ISO3 codes </summary>

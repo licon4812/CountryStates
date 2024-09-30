@@ -10,7 +10,7 @@ namespace Alickolli.CountryStates.Tests
         [Test]
         public void Countries()
         {
-            var countries = Country.Countries;
+            var countries = Country.AllCountries();
             countries.Should().NotBeEmpty();
         }
 
