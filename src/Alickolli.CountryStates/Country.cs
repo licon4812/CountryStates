@@ -12,7 +12,7 @@ namespace Alickolli.CountryStates
 {
     public class Country
     {
-        internal static ICollection<Models.Country> _countries { get; set; } = LoadData();
+        public static ICollection<Models.Country> Countries { get; set; } = LoadData();
         private static ICollection<Models.Country> LoadData()
         {
             var countries = new List<Models.Country>();
@@ -31,6 +31,7 @@ namespace Alickolli.CountryStates
             }
             return countries;
         }
+
         /// <summary> Returns Country Name from countryCode, Accepts ISO2, ISO3 codes </summary>
         public static string Name(string countryCode)
         {
@@ -41,20 +42,20 @@ namespace Alickolli.CountryStates
         /// <summary> Returns State Name from countryCode and stateCode. Accepts ISO2, ISO3 codes </summary>
         public static string StateName(string countryCode, string stateCode)
         {
-            var state = _countries.FirstOrDefault(c => c.AltSpellings.Contains(countryCode))?.States.FirstOrDefault(s => s.Abbreviation == stateCode);
+            var state = Countries.FirstOrDefault(c => c.AltSpellings.Contains(countryCode))?.States.FirstOrDefault(s => s.Abbreviation == stateCode);
             return state?.Name;
         }
 
         /// <summary> Returns a collection of States by countryCode. Accepts ISO2 and ISO3 codes </summary>
         public static ICollection<State> States(string countryCode)
         {
-            return _countries.FirstOrDefault(c => c.AltSpellings.Contains(countryCode))?.States;
+            return Countries.FirstOrDefault(c => c.AltSpellings.Contains(countryCode))?.States;
         }
 
         /// <summary> Returns a state by countryCode and stateCode. Accepts ISO2 and ISO3 codes </summary>
         public static State State(string countryCode, string stateCode)
         {
-            return _countries.FirstOrDefault(c => c.AltSpellings.Contains(countryCode))?.States.FirstOrDefault(s => s.Abbreviation == stateCode);
+            return Countries.FirstOrDefault(c => c.AltSpellings.Contains(countryCode))?.States.FirstOrDefault(s => s.Abbreviation == stateCode);
         }
 
         public static ICollection<State> Provinces(string countryCode)

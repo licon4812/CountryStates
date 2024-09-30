@@ -8,6 +8,13 @@ namespace Alickolli.CountryStates.Tests
         }
 
         [Test]
+        public void Countries()
+        {
+            var countries = Country.Countries;
+            countries.Should().NotBeEmpty();
+        }
+
+        [Test]
         public void States()
         {
             var states = Country.States("AU");
